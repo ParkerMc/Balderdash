@@ -15,7 +15,7 @@ if(isset($_POST['username'])){
 
         <html>
         <head>
-        <title>Admin Login</title>
+        <title>Login</title>
         <link rel="stylesheet" type="text/css" href="css/form.css">
 
         </head>
