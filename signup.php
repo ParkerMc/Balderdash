@@ -4,6 +4,7 @@ include 'user.php';
  if($_GET['t']=="bwb"){
  if(isset($_POST['username'])){
  if (createUser()==true){
+ header("Location: index.php");
  exit();
  }
  }
