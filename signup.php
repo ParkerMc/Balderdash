@@ -3,7 +3,9 @@ include 'config.php';
 include 'user.php';
  if($_GET['t']=="bwb"){
  if(isset($_POST['username'])){
- createUser();
+ if (createUser()==true){
+ exit();
+ }
  }
  ?>
 <html>
@@ -13,7 +15,7 @@ include 'user.php';
   </head>
   <body>
     <div id="container" style="height:380px;margin-top:-190px">
-      <form action="page2.php?t=<?php echo $_GET['t'];?>" method="post">
+      <form action="signup.php?t=<?php echo $_GET['t'];?>" method="post">
         <p class="slotName">Register</p>
         <br/>
         <label form="username">Username:<span class="required">*</span></label>

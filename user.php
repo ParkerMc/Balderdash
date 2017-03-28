@@ -5,7 +5,7 @@ function login(){
   //connect to db
   $link = mysqli_connect($db["host"], $db["username"], $db["password"], $db["database"])
   or die("<script>alert(\"Error connecting to database.\")");
-  $query = "SELECT uid, username, password FROM users where username='" . htmlspecialchars($_POST["username"]) ."'";
+  $query = "SELECT uid, username, password FROM users where username='" . htmlspecialchars(strtolower($_POST["username"])) ."'";
   $result = mysqli_query($link, $query);
   if(mysqli_num_rows($result) > 0){
     $user =  mysqli_fetch_assoc($result);
@@ -20,8 +20,9 @@ function login(){
       }
       $query = "UPDATE users SET token = '" . $token . "', tokenExp = '" . date('m/d/Y h:i:s a', strtotime("+1 week")) . "',
       ip = '" . htmlspecialchars(getRealIpAddr()) . "' WHERE users.uid = ". $user["uid"];
-      $result = mysqli_query($link, $query) or die('{"success":false, "msg":"Error logingin."}');
-      echo '{"success":true, "msg":"User logedin.", "username":"' . $user["username"] . '", "token":"' . $token . '"}';
+      $result = mysqli_query($link, $query) or die("<script>alert(\"Error loging in.\")");
+      setcookie ("token", $token);
+      return true;
     }else{
       echo "<script>alert(\"Incorrect Password.\")";
     }
@@ -40,7 +41,7 @@ function createUser(){
   if(mysqli_num_rows($result) < 1){
   if($_POST['password']==$_POST['Cpassword']){
 	  $query = "INSERT INTO `users` (`uid`, `username`, `password`, `ip`)
-      VALUES (NULL, '" . htmlspecialchars($_POST["username"]) . "', '" . password_hash(htmlspecialchars($_POST["password"]), 
+      VALUES (NULL, '" . htmlspecialchars(strtolower($_POST["username"])) . "', '" . password_hash(htmlspecialchars($_POST["password"]), 
       PASSWORD_DEFAULT) . "', '" . htmlspecialchars(getRealIpAddr()) . "')";
       $result = mysqli_query($link, $query) or die("<script>alert(\"Error createing user.\")");
       $query = "SELECT uid from users where username='" . $_POST["username"] . "'";
