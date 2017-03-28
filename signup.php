@@ -19,6 +19,7 @@ include 'user.php';
       <form action="signup.php?t=<?php echo $_GET['t'];?>" method="post">
         <p class="slotName">Register</p>
         <br/>
+        <label for="loginmsg" style="color:hsla(0,100%,50%,0.5); font-family:"Helvetica Neue",Helvetica,sans-serif;"><?php  echo $msg;?></label><br>
         <label form="username">Username:<span class="required">*</span></label>
         <input type="text" id="username" name="username" required>
         <label for="password">Password:<span class="required">*</span></label>
