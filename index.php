@@ -1,5 +1,5 @@
 <?php
 include 'user.php';
-checkLogin();
+checkLogin(); // Make sure user is loged in
 ?>
 Not ready yet :)
